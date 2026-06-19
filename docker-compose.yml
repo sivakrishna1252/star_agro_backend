@@ -26,7 +26,7 @@ services:
     ports:
       - "${APP_PORT:-6021}:6021"
     env_file:
-      - .env
+      - ${ENV_FILE:-.env}
     environment:
       DB_HOST: db
       DB_PORT: 5432

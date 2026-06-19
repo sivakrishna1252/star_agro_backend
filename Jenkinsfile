@@ -176,16 +176,15 @@ def deployLocal() {
     )]) {
         sh '''
             set -eu
-            cp "${ENV_FILE}" .env
-
+            export ENV_FILE="${ENV_FILE}"
             export DOCKER_IMAGE="${DOCKER_IMAGE}"
             export APP_PORT="${APP_PORT}"
             export CREATE_SUPERUSER="${CREATE_SUPERUSER:-false}"
             export SEED_DATA="${SEED_DATA:-false}"
 
-            docker compose -p "${COMPOSE_PROJECT}" down --remove-orphans || true
-            docker compose -p "${COMPOSE_PROJECT}" up -d --no-build --pull missing
-            docker compose -p "${COMPOSE_PROJECT}" ps
+            docker compose --env-file "${ENV_FILE}" -p "${COMPOSE_PROJECT}" down --remove-orphans || true
+            docker compose --env-file "${ENV_FILE}" -p "${COMPOSE_PROJECT}" up -d --no-build --pull missing
+            docker compose --env-file "${ENV_FILE}" -p "${COMPOSE_PROJECT}" ps
         '''
     }
 }
