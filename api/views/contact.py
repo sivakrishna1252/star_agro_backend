@@ -3,7 +3,26 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from api.serializers.contact import ContactMessageCreateSerializer
+from api.serializers.contact import ContactMessageCreateSerializer, ContactReasonSerializer
+from apps.contact.models import ContactMessage
+
+
+class ContactReasonListView(APIView):
+    @extend_schema(
+        tags=["Forms"],
+        summary="List contact form reason options",
+        description=(
+            "Returns the dropdown options for the contact page "
+            "'Reason for Contact' field."
+        ),
+        responses={200: ContactReasonSerializer(many=True)},
+    )
+    def get(self, request):
+        reasons = [
+            {"value": choice.value, "label": choice.label}
+            for choice in ContactMessage.ReasonForContact
+        ]
+        return Response(reasons)
 
 
 class ContactCreateView(APIView):
@@ -30,7 +49,7 @@ class ContactCreateView(APIView):
                     "name": "Jane Smith",
                     "email": "jane@company.com",
                     "phone": "+919876543210",
-                    "subject": "Partnership Inquiry",
+                    "reason": "partnership_opportunity",
                     "message": "We would like to discuss distribution partnership.",
                 },
                 request_only=True,

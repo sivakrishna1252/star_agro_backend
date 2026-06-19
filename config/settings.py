@@ -153,9 +153,27 @@ SPECTACULAR_SETTINGS = {
 # CORS — override with comma-separated CORS_ALLOWED_ORIGINS in production
 CORS_ALLOWED_ORIGINS = _env_list(
     "CORS_ALLOWED_ORIGINS",
-    "http://localhost:3000,http://127.0.0.1:3000",
+    "http://localhost:3000,http://127.0.0.1:3000,http://localhost:5173,http://127.0.0.1:5173",
 )
+# Allow aspune.cloud / staragsurf.com frontends when env list is incomplete
+CORS_ALLOWED_ORIGIN_REGEXES = [
+    r"^https://[\w-]+\.aspune\.cloud$",
+    r"^https://(www\.)?staragsurf\.com$",
+    r"^http://localhost:\d+$",
+    r"^http://127\.0\.0\.1:\d+$",
+]
 CORS_ALLOW_CREDENTIALS = True
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")

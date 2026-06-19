@@ -31,6 +31,7 @@ python manage.py runserver
 | GET | `/api/documents/` | Product documents |
 | GET | `/api/company-documents/` | Company documents |
 | POST | `/api/inquiries/` | Product inquiry |
+| GET | `/api/contact/reasons/` | Contact form reason options |
 | POST | `/api/contact/` | General contact message |
 | GET | `/api/site-settings/` | CMS content |
 | GET | `/api/search/` | Global search |
@@ -45,6 +46,6 @@ http://127.0.0.1:8000/admin/ — `admin` / `admin123`
 
 Manage: product status, thumbnails, ordering, inquiry notes, contact messages, company documents.
 
-Full documentation: [API.md](API.md) (frontend integration) | [WORKFLOW.md](WORKFLOW.md) | [ARCHITECTURE.md](ARCHITECTURE.md)
+Full documentation: **[FRONTEND_INTEGRATION.md](FRONTEND_INTEGRATION.md)** (complete frontend guide — share with frontend team) | [API.md](API.md) | [WORKFLOW.md](WORKFLOW.md) | [ARCHITECTURE.md](ARCHITECTURE.md)
 
 **Swagger UI:** http://127.0.0.1:8000/api/docs/
