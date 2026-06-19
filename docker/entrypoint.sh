@@ -17,7 +17,7 @@ import psycopg2
 host = os.environ.get("DB_HOST", "db")
 port = int(os.environ.get("DB_PORT", "5432"))
 name = os.environ.get("DB_NAME", "star_agro")
-user = os.environ.get("DB_USER", "postgres")
+user = os.environ.get("DB_USER") or os.environ.get("DB_USERNAME", "postgres")
 password = os.environ.get("DB_PASSWORD", "")
 
 for attempt in range(1, 31):

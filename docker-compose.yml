@@ -1,5 +1,6 @@
 services:
   db:
+    profiles: ["local-db"]
     image: postgres:16-alpine
     restart: unless-stopped
     environment:
@@ -28,8 +29,9 @@ services:
     env_file:
       - ${ENV_FILE:-.env}
     environment:
-      DB_HOST: db
-      DB_PORT: 5432
+      DB_HOST: ${DB_HOST:-db}
+      DB_PORT: ${DB_PORT:-5432}
+      DB_USER: ${DB_USER:-postgres}
       APP_PORT: 6021
       DEBUG: ${DEBUG:-False}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS:-localhost,127.0.0.1,web}
@@ -40,6 +42,7 @@ services:
     depends_on:
       db:
         condition: service_healthy
+        required: false
     networks:
       - star_agro_net
 
