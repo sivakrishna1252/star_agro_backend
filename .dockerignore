@@ -1,0 +1,31 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+*.egg-info
+.venv
+venv
+env
+
+# Django runtime artifacts
+staticfiles
+*.log
+db.sqlite3
+
+# Local secrets (use env_file / compose environment in production)
+.env
+.env.*
+
+# IDE / OS
+.idea
+.vscode
+*.swp
+.DS_Store
+Thumbs.db
+
+# Docs (not needed in image)
+*.md
+!README.md
