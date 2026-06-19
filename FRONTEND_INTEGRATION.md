@@ -1,7 +1,7 @@
 # Star Agsurf — Frontend API Integration
 
 > Share this file with the frontend team and open it in Cursor.  
-> **Base URL:** `https://star-api.aspune.cloud/api`
+> **Base URL:** `http://star-api.aspune.cloud/api`
 
 ---
 
@@ -15,14 +15,14 @@ Read FRONTEND_INTEGRATION.md in this project.
 The UI/design is already complete. Do NOT change layout, styling, or page structure.
 
 Your job is ONLY to connect the existing pages/components to the backend API:
-- Base URL: https://star-api.aspune.cloud/api
+- Base URL: http://star-api.aspune.cloud/api
 - Replace all hardcoded/mock/static product, category, about, contact, logo, and document data with live API calls from this document.
 - Wire forms: product inquiry → POST /inquiries/, contact page → POST /contact/
 - Use the "Which API for Which Page" table to map each existing page to the correct endpoint.
 - Admin adds/edits content in Django Admin → frontend must read it via GET APIs (no admin login in frontend).
 - Only published products appear in API. Use thumbnail_url, file_url, image_url from API responses.
 - Render description, about_us, vision, mission as HTML from API.
-- Add NEXT_PUBLIC_API_BASE_URL=https://star-api.aspune.cloud/api in .env
+- Add NEXT_PUBLIC_API_BASE_URL=http://star-api.aspune.cloud/api in .env
 - Keep existing component names and UI. Only add API fetch logic, env config, and connect props/state to API data.
 ```
 
@@ -35,7 +35,7 @@ Admin and frontend both use the same backend database — admin writes, frontend
 
 ```
 ADMIN (Django Admin)                    FRONTEND (Website)
-https://star-api.aspune.cloud/admin/    https://your-frontend-domain.com
+http://star-api.aspune.cloud/admin/    https://your-frontend-domain.com
 
 Admin adds/edits:                       Frontend reads via API:
 ├── Products                            ├── GET /products/
@@ -88,7 +88,7 @@ Frontend  ──POST──► /api/contact/   → general contact form
 ### Environment variable
 
 ```env
-NEXT_PUBLIC_API_BASE_URL=https://star-api.aspune.cloud/api
+NEXT_PUBLIC_API_BASE_URL=http://star-api.aspune.cloud/api
 ```
 
 ### Headers (all requests)
@@ -103,8 +103,8 @@ Content-Type: application/json    ← POST only
 The backend allows browser requests from:
 
 - `http://localhost:*` and `http://127.0.0.1:*` (any dev port)
-- `https://*.aspune.cloud`
-- `https://staragsurf.com` and `https://www.staragsurf.com`
+- `http://*.aspune.cloud` and `https://*.aspune.cloud`
+- `http://staragsurf.com`, `https://staragsurf.com`, and `www` variants
 - Any origin listed in server env `CORS_ALLOWED_ORIGINS`
 
 If the contact form shows a CORS error, confirm the frontend domain is covered above or ask backend to add it to `CORS_ALLOWED_ORIGINS`.
@@ -116,7 +116,7 @@ List endpoints return:
 ```json
 {
   "count": 18,
-  "next": "https://star-api.aspune.cloud/api/products/?page=2",
+  "next": "http://star-api.aspune.cloud/api/products/?page=2",
   "previous": null,
   "results": [ ... ]
 }
@@ -144,7 +144,7 @@ List endpoints return:
 | 11 | GET | `/contact/reasons/` | Contact form reason dropdown options |
 | 12 | POST | `/contact/` | Contact form |
 
-**Live docs:** https://star-api.aspune.cloud/api/docs/
+**Live docs:** http://star-api.aspune.cloud/api/docs/
 
 ---
 
@@ -207,7 +207,7 @@ List endpoints return:
       "display_order": 5,
       "meta_title": "",
       "meta_description": "",
-      "thumbnail_url": "https://star-api.aspune.cloud/media/products/thumbnails/image.jpg"
+      "thumbnail_url": "http://star-api.aspune.cloud/media/products/thumbnails/image.jpg"
     }
   ]
 }
@@ -235,7 +235,7 @@ List endpoints return:
   "formulation_type": "SC",
   "is_featured": false,
   "display_order": 5,
-  "thumbnail_url": "https://star-api.aspune.cloud/media/...",
+  "thumbnail_url": "http://star-api.aspune.cloud/media/...",
   "category": {
     "id": 2,
     "name": "SC Formulations",
@@ -247,7 +247,7 @@ List endpoints return:
     {
       "id": 1,
       "image": "/media/products/images/photo1.jpg",
-      "image_url": "https://star-api.aspune.cloud/media/products/images/photo1.jpg",
+      "image_url": "http://star-api.aspune.cloud/media/products/images/photo1.jpg",
       "alt_text": "Product photo",
       "is_primary": true,
       "display_order": 0
@@ -267,7 +267,7 @@ List endpoints return:
       "id": 1,
       "document_name": "STAGSURF SC 6875 TDS",
       "document_type": "TDS",
-      "file_url": "https://star-api.aspune.cloud/media/documents/products/tds.pdf",
+      "file_url": "http://star-api.aspune.cloud/media/documents/products/tds.pdf",
       "display_order": 0
     }
   ],
@@ -339,7 +339,7 @@ Same response shape as `/products/` — only products where `is_featured = true`
       "id": 1,
       "document_name": "STAGSURF SC 6875 TDS",
       "document_type": "TDS",
-      "file_url": "https://star-api.aspune.cloud/media/documents/products/tds.pdf",
+      "file_url": "http://star-api.aspune.cloud/media/documents/products/tds.pdf",
       "product_name": "STAGSURF SC 6875",
       "product_slug": "stagsurf-sc-6875",
       "display_order": 0,
@@ -369,7 +369,7 @@ Same response shape as `/products/` — only products where `is_featured = true`
       "id": 1,
       "title": "Company Profile 2026",
       "document_type": "COMPANY_PROFILE",
-      "file_url": "https://star-api.aspune.cloud/media/documents/company/profile.pdf",
+      "file_url": "http://star-api.aspune.cloud/media/documents/company/profile.pdf",
       "display_order": 0,
       "created_at": "2026-06-15T16:07:51+05:30"
     }
@@ -386,7 +386,7 @@ Same response shape as `/products/` — only products where `is_featured = true`
 ```json
 {
   "site_name": "Star Agsurf Industries",
-  "company_logo_url": "https://star-api.aspune.cloud/media/site/logo.png",
+  "company_logo_url": "http://star-api.aspune.cloud/media/site/logo.png",
   "tagline": "Specialty Surfactants & Agrochemical Formulations",
   "about_us": "<p>HTML content</p>",
   "vision": "<p>HTML content</p>",
@@ -584,7 +584,7 @@ You can hardcode these in the frontend UI, or fetch them from this endpoint so a
 ## Integration Example
 
 ```javascript
-const API = process.env.NEXT_PUBLIC_API_BASE_URL; // https://star-api.aspune.cloud/api
+const API = process.env.NEXT_PUBLIC_API_BASE_URL; // http://star-api.aspune.cloud/api
 
 // GET
 async function getProducts(category) {
@@ -659,7 +659,7 @@ async function submitContact(data) {
 
 | Topic | Covered in this doc? |
 |-------|----------------------|
-| Deploy API base URL | Yes — `https://star-api.aspune.cloud/api` |
+| Deploy API base URL | Yes — `http://star-api.aspune.cloud/api` |
 | All 12 API endpoints | Yes — with request/response examples |
 | Which API for each page | Yes — table above |
 | Admin adds product → shows on website | Yes — Published status required |
@@ -670,7 +670,7 @@ async function submitContact(data) {
 | Search, filters, pagination | Yes |
 | No auth / no admin login in frontend | Yes |
 | Cursor prompt for existing UI | Yes — top of this file |
-| Live Swagger docs | Yes — https://star-api.aspune.cloud/api/docs/ |
+| Live Swagger docs | Yes — http://star-api.aspune.cloud/api/docs/ |
 
 **Not in frontend scope:** Django Admin login, database, backend setup — admin team handles that separately.
 

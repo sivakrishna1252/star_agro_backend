@@ -157,8 +157,8 @@ CORS_ALLOWED_ORIGINS = _env_list(
 )
 # Allow aspune.cloud / staragsurf.com frontends when env list is incomplete
 CORS_ALLOWED_ORIGIN_REGEXES = [
-    r"^https://[\w-]+\.aspune\.cloud$",
-    r"^https://(www\.)?staragsurf\.com$",
+    r"^https?://[\w-]+\.aspune\.cloud$",
+    r"^https?://(www\.)?staragsurf\.com$",
     r"^http://localhost:\d+$",
     r"^http://127\.0\.0\.1:\d+$",
 ]
