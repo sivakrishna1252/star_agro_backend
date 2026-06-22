@@ -180,6 +180,16 @@ if not DEBUG:
     SESSION_COOKIE_SECURE = _env_bool("SESSION_COOKIE_SECURE", default=True)
     CSRF_COOKIE_SECURE = _env_bool("CSRF_COOKIE_SECURE", default=True)
 
+# Email (Gmail SMTP for contact form notifications)
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = os.getenv("EMAIL_HOST", "smtp.gmail.com")
+EMAIL_PORT = int(os.getenv("EMAIL_PORT", "587"))
+EMAIL_USE_TLS = _env_bool("EMAIL_USE_TLS", default=True)
+EMAIL_HOST_USER = os.getenv("EMAIL_USER", "")
+EMAIL_HOST_PASSWORD = os.getenv("EMAIL_PASS", "")
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL", EMAIL_HOST_USER or "noreply@staragsurf.com")
+CONTACT_NOTIFICATION_EMAIL = os.getenv("CONTACT_NOTIFICATION_EMAIL", EMAIL_HOST_USER)
+
 # CKEditor — rich text for product descriptions and site content
 CKEDITOR_CONFIGS = {
     "default": {

@@ -5,6 +5,7 @@ from rest_framework.views import APIView
 
 from api.serializers.contact import ContactMessageCreateSerializer, ContactReasonSerializer
 from apps.contact.models import ContactMessage
+from apps.contact.notifications import send_contact_notification
 
 
 class ContactReasonListView(APIView):
@@ -60,6 +61,7 @@ class ContactCreateView(APIView):
         serializer = ContactMessageCreateSerializer(data=request.data)
         if serializer.is_valid():
             message = serializer.save()
+            send_contact_notification(message)
             return Response(
                 {
                     "success": True,
