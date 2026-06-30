@@ -15,11 +15,13 @@ from .seed_catalog import (
     BROCHURE_PRODUCT_SLUGS,
     BROCHURE_SPECIALTY_SLUGS,
     CATEGORIES,
+    CLIENT_REMOVED_PRODUCT_SLUGS,
     LEGACY_CATEGORY_SLUGS,
     PRODUCT_TDS,
     PRODUCTS,
     SITE_SETTINGS,
     build_short_description,
+    catalog_products,
 )
 
 
@@ -189,8 +191,8 @@ class Command(BaseCommand):
     def _product_rows(self, seed_scope):
         slugs = self._brochure_slugs(seed_scope)
         if slugs is None:
-            return PRODUCTS
-        return [row for row in PRODUCTS if row[1] in slugs]
+            return catalog_products()
+        return [row for row in catalog_products() if row[1] in slugs]
 
     def _category_rows(self, seed_scope):
         if seed_scope == "full":
@@ -231,7 +233,7 @@ class Command(BaseCommand):
                 )
 
         if seed_scope == "full":
-            all_product_slugs = [row[1] for row in PRODUCTS]
+            all_product_slugs = [row[1] for row in catalog_products()]
             for slug in PRODUCT_TDS:
                 if slug not in all_product_slugs:
                     errors.append(f"TDS entry references unknown product slug '{slug}'.")

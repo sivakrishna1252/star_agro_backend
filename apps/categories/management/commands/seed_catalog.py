@@ -1245,25 +1245,12 @@ PRODUCT_TDS = {
 }
 
 
-# Products from brochure pages 4–5 ("Products vs Competition" table only).
-# Excludes pages 1–3 content (company overview, portfolio, specialty products).
-BROCHURE_COMPARISON_SLUGS = frozenset(
+# Client removed these brochure comparison tables (pages 4–5):
+# - Surfactants for SC Formulations
+# - Performance Chemicals
+# - Special Surfactants for EC Formulations
+CLIENT_REMOVED_PRODUCT_SLUGS = frozenset(
     {
-        "stagspread-4080",
-        "stagsurf-425",
-        "stagsurf-pd-137",
-        "stagwet-sls",
-        "stagwet-aos",
-        "stagsurf-ag810",
-        "stagwet-wt-7200",
-        "stagwet-roe60",
-        "stagsurf-ds-90-m",
-        "stagsurf-wt-100",
-        "stagsurf-po-1000",
-        "stagsurf-ec-400",
-        "stagsurf-ec-3418",
-        "stagsurf-tae",
-        "stagsurf-ntae",
         "stagsurf-d33",
         "stagsurf-tfl",
         "stagsurf-tflk",
@@ -1277,6 +1264,27 @@ BROCHURE_COMPARISON_SLUGS = frozenset(
         "stagsurf-g5000",
         "stagsurf-1306",
         "stagwet-ep1056",
+        "stagsurf-425",
+        "stagsurf-pd-137",
+        "stagwet-sls",
+        "stagwet-aos",
+        "stagsurf-ag810",
+        "stagwet-wt-7200",
+        "stagwet-roe60",
+        "stagsurf-ds-90-m",
+        "stagsurf-wt-100",
+        "stagsurf-po-1000",
+        "stagsurf-ec-400",
+        "stagsurf-ec-3418",
+    }
+)
+
+# Remaining brochure pages 4–5 comparison products (client kept).
+BROCHURE_COMPARISON_SLUGS = frozenset(
+    {
+        "stagspread-4080",
+        "stagsurf-tae",
+        "stagsurf-ntae",
     }
 )
 
@@ -1302,8 +1310,13 @@ BROCHURE_SPECIALTY_SLUGS = frozenset(
     }
 )
 
-# All brochure product pages (3 + 4 + 5) — 43 unique products.
+# All brochure product pages (3 + 4 + 5) kept by client.
 BROCHURE_PRODUCT_SLUGS = BROCHURE_COMPARISON_SLUGS | BROCHURE_SPECIALTY_SLUGS
+
+
+def catalog_products():
+    """Products available for seeding (excludes client-removed items)."""
+    return [row for row in PRODUCTS if row[1] not in CLIENT_REMOVED_PRODUCT_SLUGS]
 
 
 def build_short_description(name, function, equivalent, formulation):

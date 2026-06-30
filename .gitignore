@@ -26,3 +26,8 @@ media/*
 # OS
 .DS_Store
 Thumbs.db
+
+# Local one-off scripts (never commit)
+_compare_*.py
+_check_*.py
+_temp_*.py
